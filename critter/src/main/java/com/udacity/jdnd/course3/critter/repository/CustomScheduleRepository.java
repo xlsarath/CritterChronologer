@@ -20,8 +20,8 @@ public interface CustomScheduleRepository {
 
     @Query(value = "select s.* from schedule s " +
             " join schedule_pets sp on s.id = sp.schedule_id " +
-            " join customer_pet_relationship cpr on sp.pets_id = cpr.pet_id " +
-            " where cpr.customer_id = :customerId",
+            " join customerid_petid_map c on sp.pets_id = c.pet_id " +
+            " where c.customer_id = :customerId",
             nativeQuery = true)
     List<Schedule> getScheduleForCustomer(long customerId);
 

@@ -4,7 +4,7 @@ package com.udacity.jdnd.course3.critter.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customer_pet_relationship")
+@Table(name = "customerid_petid_map")
 public class CustomerPetRelationship {
 
     @Id

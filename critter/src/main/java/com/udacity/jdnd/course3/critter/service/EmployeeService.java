@@ -29,9 +29,8 @@ public class EmployeeService {
 
     public void setAvailability(Set<DayOfWeek> daysAvailable, long employeeId) {
         Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
-        if (!employeeOptional.isPresent()) {
-            return;
-        }
+        if (!employeeOptional.isPresent())  return;
+
         Employee employee = employeeOptional.get();
         employee.setDaysAvailable(daysAvailable);
         employeeRepository.save(employee);
@@ -47,12 +46,10 @@ public class EmployeeService {
 
     public List<Employee> findEmployeesForService(LocalDate date, Set<EmployeeSkill> skills) {
 
-        //1. Get the employee that is available on the date
         int dayOfWeek = date.getDayOfWeek().getValue() - 1;
         List<Employee> unDutyEmployees = employeeRepository
                 .findEmployeesForService(dayOfWeek);
 
-        //2. filter out unskilled employees
         return unDutyEmployees.stream()
                 .filter(employee -> employee.getSkills().containsAll(skills))
                 .collect(Collectors.toList());
